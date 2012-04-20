@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+    <title>JS Template Engine</title>
+    
+    <script type='text/javascript' src="js/jstengine.js"></script>
+    <script type='text/javascript' src="js/view.js"></script>
+    <script type='text/javascript'>
+
+        var Template = new JSTemplate();
+
+        window.onload = function()
+        {
+            var box = document.getElementById('box');
+
+            box.innerHTML += Template.render( {'title':'Page Title','description':'Complete description\'s page!'}, View.post );
+            box.innerHTML += Template.render( {'bold':'Bold content!','italic':'Italic content!'}, View.markup );
+            
+            var list = document.getElementById('list');
+            
+            var JSON = [
+                {'href':'http://www.google.com','link':'Google'},
+                {'href':'http://www.nike.com','link':'Nike'},
+                {'href':'http://www.facebook.com','link':'Facebook'},
+                {'href':'http://www.twitter.com','link':'Twitter'},
+                {'href':'http://www.orkut.com','link':'Orkut'},
+                {'href':'http://www.mashable.com','link':'Mashable'}
+            ];
+            
+            // Iteration example.
+            list.innerHTML += Template.render( JSON, View.li );
+
+            // Example with a unique replace.
+            list.innerHTML += Template.render( {'href':'http://www.chavao.net','link':'Chavão'}, View.li );
+        }
+
+    </script>
+</head>
+<body>
+
+<div id='box'></div>
+
+<ul id="list"></ul>
+
+</body>
+</html>
